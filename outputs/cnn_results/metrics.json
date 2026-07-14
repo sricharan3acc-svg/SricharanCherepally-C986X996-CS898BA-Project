@@ -1,0 +1,48 @@
+{
+  "metrics": {
+    "accuracy": 0.8615384615384616,
+    "precision": 0.8403846153846154,
+    "recall": 0.9646799116997793,
+    "f1": 0.8982528263103803
+  },
+  "confusion_matrix": [
+    [
+      179,
+      83
+    ],
+    [
+      16,
+      437
+    ]
+  ],
+  "history": [
+    {
+      "epoch": 1,
+      "loss": 0.5518668639659882,
+      "train_acc": 0.7175
+    },
+    {
+      "epoch": 2,
+      "loss": 0.373236399491628,
+      "train_acc": 0.8525
+    },
+    {
+      "epoch": 3,
+      "loss": 0.3020388126373291,
+      "train_acc": 0.8875
+    },
+    {
+      "epoch": 4,
+      "loss": 0.2876033691565196,
+      "train_acc": 0.8875
+    }
+  ],
+  "pretrained_imagenet_weights": true,
+  "config": {
+    "train_subset_per_class": 600,
+    "epochs": 4,
+    "img_size": 160,
+    "batch_size": 32,
+    "lr": 0.001
+  }
+}
