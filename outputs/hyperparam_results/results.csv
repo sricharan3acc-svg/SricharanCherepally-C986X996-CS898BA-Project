@@ -1,0 +1,6 @@
+name,epochs,lr,batch_size,unfreeze_layers,train_images,trainable_params,train_time_sec,accuracy,precision,recall,f1
+baseline_frozen,6,0.001,32,0,6633,2562,677.2,0.9259,0.9202,0.9669,0.9429
+partial_unfreeze,6,0.0001,32,20,6633,2226434,2025.6,0.9958,1.0,0.9934,0.9967
+full_unfreeze,6,1e-05,32,999,6633,2226434,2002.6,0.9958,1.0,0.9934,0.9967
+partial_unfreeze_bigbatch,6,0.0001,64,20,6633,2226434,3665.2,0.9972,1.0,0.9956,0.9978
+partial_unfreeze_moreepochs,12,0.0001,32,20,6633,2226434,3711.3,0.9986,1.0,0.9978,0.9989

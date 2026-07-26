@@ -1,0 +1,2 @@
+accuracy,precision,recall,f1,train_time_sec,train_images_after_dedup,test_images
+0.9986,1.0,0.9978,0.9989,3360.9,6569,715
