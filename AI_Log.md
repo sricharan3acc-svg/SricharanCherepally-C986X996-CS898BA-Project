@@ -43,3 +43,33 @@ Initial project setup (topic selection, dataset identification, pitch slide deck
 **Prompt:** Asked Claude to draft an updated README.md (setup instructions, results table, roadblocks) and this AI_Log.md, reflecting the actual work and results from this session.
 **Response synopsis:** Claude generated both files as direct downloads to avoid encoding/formatting issues from copy-pasting into Word or the chat window.
 **Resulting change:** Updated `README.md` and `AI_Log.md` with real content reflecting this session's work.
+
+### Entry 7: Hyperparameter Optimization Sweep
+**Tool:** Claude (claude.ai)
+**Prompt:** Asked Claude to design and build a configurable CNN training script to test multiple hyperparameter settings (backbone unfreezing, learning rate, batch size, epochs) on the full training set, per the Final Presentation's Hyperparameter Optimization requirement.
+**Response synopsis:** Claude wrote train_cnn_experiment.py, a command-line configurable version of the CNN training script that logs each run's results to a shared CSV. Proposed and I ran 5 experiments varying one setting at a time from a baseline configuration.
+**Resulting change:** Added src/train_cnn_experiment.py and outputs/hyperparam_results/results.csv. Found that unfreezing backbone layers was the dominant factor (92.6% to 99.58% accuracy), with batch size and epoch count giving smaller additional gains, topping out at 99.86% accuracy.
+
+### Entry 8: Image Analysis Evaluation (CLAHE Ablation)
+**Tool:** Claude (claude.ai)
+**Prompt:** Asked Claude to test whether the CLAHE preprocessing step actually improved classical model performance, rather than assuming it did.
+**Response synopsis:** Claude built a no-CLAHE variant of the feature extraction pipeline (features_no_clahe.py, run_clahe_ablation.py) and ran a direct comparison. Found CLAHE's effect was small and mixed - it helped Random Forest marginally but SVM performed slightly better without it.
+**Resulting change:** Added src/features_no_clahe.py and src/run_clahe_ablation.py. Documented as an honest finding in README.md rather than assuming the pitch's original CLAHE justification held.
+
+### Entry 9: Data Integrity Check (Leakage Discovery and Fix)
+**Tool:** Claude (claude.ai)
+**Prompt:** Asked Claude whether the near-100% CNN accuracy from the hyperparameter sweep was trustworthy, given how unusually high it was.
+**Response synopsis:** Claude recommended checking for train/test image duplication via file hashing. This surfaced 64 duplicate images (9% of the test set) present in both splits, entirely concentrated in the normal class. Claude then built train_cnn_clean.py, which removes these duplicates from training before retraining the winning hyperparameter configuration.
+**Resulting change:** Added src/train_cnn_clean.py and outputs/cnn_clean_results/. Confirmed the 99.86% accuracy result held even with the duplicates removed, verifying the score was not an artifact of data leakage.
+
+### Entry 10: Virtual Demonstration
+**Tool:** Claude (claude.ai)
+**Prompt:** Asked Claude to build a live demonstration script per the Final Presentation's Virtual Demonstration requirement, showing real predictions happening on screen rather than static slides.
+**Response synopsis:** Claude built save_model_for_demo.py (trains and saves the Random Forest model) and live_demo.py (loads real, unseen test images one at a time, runs them through the full pipeline, and displays live predictions with confidence scores in a single persistent window suitable for screen recording).
+**Resulting change:** Added both scripts and outputs/demo_model.joblib. Live demo run achieved 5/6 correct (83.3%) on images never seen during training, screen-recorded as a separate submission video.
+
+### Entry 11: Final Slide Deck and Documentation
+**Tool:** Claude (claude.ai)
+**Prompt:** Asked Claude to build the final presentation slide deck covering all of the above, and update README.md and AI_Log.md to reflect the complete final-phase work.
+**Response synopsis:** Claude built an 8-slide deck (Architecture, Image Analysis Evaluation, Hyperparameter Optimization, Data Integrity Check, Results and Metrics, Virtual Demonstration, Conclusion) using real charts and numbers from the above experiments, then generated updated README.md and AI_Log.md as direct downloads.
+**Resulting change:** Added Casting_Defect_Detection_Final.pptx, updated README.md and AI_Log.md.
